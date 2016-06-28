@@ -63,9 +63,91 @@ Presentation made by [FsReveal](http://fsprojects.github.io/FsReveal)
 
 ## What is Functional Programming
 
+---
+
+> Functional programming is a style of programming that emphasizes the evaluation of expressions, rather than execution of commands. The expressions in these languages are formed by using functions to combine basic values.
+
+*Hutton*
+
+---
+
+### Statements vs Expressions
+
+* Imperative style:
+    * Statements
+    * Commands
+* Declarative style:
+    * Expressions
+    * Functional
+
+https://twitter.com/mariofusco/status/571999216039542784
+
+---
+
+![imperatywny vs funkcyjny](images/imperative_functional.jpg)
+
+---
+
+### Brief history
+
+* First functional language: LISP (1958)
+* ML (1970) - generic functions
+* OCaml (1996) - hybrid language
+* F# came live with VS 2010 
+
+Other important FP languages: Haskell, Erlang, Scala, Clojure
+
 ***
 
 ## Why Functional Programming
+
+---
+
+### Prevent unwanted side effects
+
+    [lang=csharp]
+    public int TestA()
+    {
+        return 5 + 6;
+    }
+
+    public int TestA()
+    {
+        return Sum(5, 6);
+    }
+
+    public int Sum(int a, int b)
+    {
+        var result = a + b;
+        Console.WriteLine("Result is {0}", result);
+        return a + b;
+    }
+
+*"Referential transparency"*
+
+---
+
+### Generalize common patterns
+
+*"Parametric polymorphism"*
+
+---
+
+### Discover right abstractions
+
+---
+
+### Inhale concurrency
+
+---
+
+### Make code more testable
+
+*"Isolation"*
+
+---
+
+### Twitter reactions
 
 ***
 
