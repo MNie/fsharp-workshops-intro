@@ -1,0 +1,539 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Introduction to Functional Programming</title>
+    <meta name="description" content="Introduction to Functional Programming">
+    <meta name="author" content="Tomasz Heimowski">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="//code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="//code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/night.css" id="theme">
+    <link type="text/css" rel="stylesheet" href="fsharp.formatting/styles/style.css" />
+    <link type="text/css" rel="stylesheet" href="fsharp.formatting/styles/deedle.css" />
+    <link type="text/css" rel="stylesheet" href="css/custom.css" />
+    <script src="fsharp.formatting/styles/tips.js" type="text/javascript"></script>
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/fsreveal.css">
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <script language="javascript" type="text/javascript">
+        function init()
+        {
+            websocket = new WebSocket("ws://"+window.location.host+"/websocket");
+            websocket.onmessage = function(evt) { location.reload(); };
+        }
+        window.addEventListener("load", init, false);
+    </script>
+</head>
+<body>
+    <div class="reveal">
+        
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section >
+<section >
+<h2>F# CAMP</h2>
+<h3>Tomasz Heimowski</h3>
+</section>
+<section >
+<h3>Agenda</h3>
+<ol>
+<li>Introduction to the workshop series</li>
+<li>What is Functional Programming</li>
+<li>Why Functional Programming</li>
+<li>Examples of functional concepts in C#</li>
+</ol>
+</section>
+</section>
+<section >
+<section >
+<h2>Introduction to the workshop series</h2>
+</section>
+<section >
+<h3>Aim</h3>
+<ul>
+<li>Learn F# language</li>
+<li>Discover Functional Programming concepts</li>
+<li>Have fun</li>
+<li>No prior F# / Functional Programming knowledge required - we're starting from scratch</li>
+</ul>
+</section>
+<section >
+<h3>Format</h3>
+<ul>
+<li>
+4 meetings in July
+<ul>
+<li>first - introductory talk (this one, ~45min)</li>
+<li>2nd, 3rd, 4th - combined talk + workshops (45+90 ~= 2-2.5h)</li>
+</ul>
+</li>
+<li>Each workshop will cover concepts from the preceding talk</li>
+<li>If it rolls out nicely, there'll be a continuation of the series</li>
+</ul>
+</section>
+<section >
+<h3>Real World Functional Programming</h3>
+<p><img src="images/real-world-functional-programming-cover.jpg" alt="real-world-functional-programming-cover" /></p>
+<p><a href="https://amzn.com/1933988924">https://amzn.com/1933988924</a></p>
+</section>
+<section >
+<h3>Source for presentations</h3>
+<ul>
+<li>Agenda - <a href="http://gda-gitlab-01.globalintech.pl/theimowski/fsharp-workshops">http://gda-gitlab-01.globalintech.pl/theimowski/fsharp-workshops</a></li>
+<li>This presentation - <a href="http://gda-gitlab-01.globalintech.pl/theimowski/fsharp-workshops-intro">http://gda-gitlab-01.globalintech.pl/theimowski/fsharp-workshops-intro</a></li>
+</ul>
+<p>Presentation made by <a href="http://fsprojects.github.io/FsReveal">FsReveal</a></p>
+</section>
+<section >
+<h3>Prerequisites</h3>
+<p>Install F# for workshops</p>
+<p><a href="http://fsharp.org/use/windows/">http://fsharp.org/use/windows/</a></p>
+<p>If you have VS 2015, but no F# installed:</p>
+<p><a href="https://github.com/Microsoft/visualfsharp/issues/544#issuecomment-221505568">https://github.com/Microsoft/visualfsharp/issues/544#issuecomment-221505568</a></p>
+</section>
+</section>
+<section >
+<section >
+<h2>What is Functional Programming</h2>
+</section>
+<section >
+<blockquote>
+<p>Functional programming is a style of programming that emphasizes the evaluation of expressions, rather than execution of commands. The expressions in these languages are formed by using functions to combine basic values.</p>
+</blockquote>
+<p><em>Hutton</em></p>
+</section>
+<section >
+<h3>Statements vs Expressions</h3>
+<ul>
+<li>
+Imperative style:
+<ul>
+<li>Statements</li>
+<li>Commands</li>
+</ul>
+</li>
+<li>
+Declarative style:
+<ul>
+<li>Expressions</li>
+<li>Functional</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://twitter.com/mariofusco/status/571999216039542784">https://twitter.com/mariofusco/status/571999216039542784</a></p>
+</section>
+<section >
+<p><img src="images/imperative_functional.jpg" alt="imperatywny vs funkcyjny" /></p>
+</section>
+<section >
+<h3>Brief history</h3>
+<ul>
+<li>First functional language: LISP (1958)</li>
+<li>ML (1970) - generic functions</li>
+<li>OCaml (1996) - hybrid language</li>
+<li>F# came live with VS 2010</li>
+</ul>
+<p>Other important FP languages: Haskell, Erlang, Scala, Clojure</p>
+</section>
+</section>
+<section >
+<section >
+<h2>Why Functional Programming</h2>
+</section>
+<section >
+<h3>Prevent unwanted side effects</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="csharp"><span class="k">public</span> <span class="k">int</span> TestA()
+{
+    <span class="k">return</span> <span class="n">5</span> <span class="o">+</span> <span class="n">6</span>;
+}
+
+<span class="k">public</span> <span class="k">int</span> TestA()
+{
+    <span class="k">return</span> Sum(<span class="n">5</span>, <span class="n">6</span>);
+}
+
+<span class="k">public</span> <span class="k">int</span> Sum(<span class="k">int</span> a, <span class="k">int</span> b)
+{
+    <span class="k">var</span> result <span class="o">=</span> a <span class="o">+</span> b;
+    Console.WriteLine(<span class="s">"Result is {0}"</span>, result);
+    <span class="k">return</span> a <span class="o">+</span> b;
+}
+</code></pre></td></tr></table>
+<p><em>"Referential transparency"</em></p>
+</section>
+<section >
+<h3>Make code more testable</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="csharp"><span class="k">public</span> <span class="k">decimal</span> TestMe(<span class="k">decimal</span> hourlyRate, <span class="k">decimal</span> hours)
+{
+    <span class="k">if</span> (System.DateTime.Now.DayOfWeek <span class="o">=</span> DayOfWeek.Saturday)
+    {
+        <span class="k">return</span> hourlyRate <span class="o">*</span> hours <span class="o">*</span> <span class="n">1.5</span>M;
+    }
+    <span class="k">else</span> <span class="k">if</span> (System.DateTime.Now.DayOfWeek <span class="o">=</span> DayOfWeek.Sunday)
+    {
+        <span class="k">return</span> hourlyRate <span class="o">*</span> hours <span class="o">*</span> <span class="n">2.0</span>M;
+    }
+    <span class="k">else</span> 
+    {
+        <span class="k">return</span> hourlyRate <span class="o">*</span> hours;
+    }
+}
+</code></pre></td></tr></table>
+<p><em>"Isolation"</em></p>
+</section>
+<section >
+<h3>Generalize common patterns</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="csharp"><span class="k">public</span> <span class="k">int</span> Sum(<span class="k">int</span>[] numbers)
+{
+    <span class="k">var</span> sum <span class="o">=</span> <span class="n">0</span>;
+    <span class="k">for</span> (<span class="k">int</span> i <span class="o">=</span> <span class="n">0</span>; i <span class="o">&lt;</span> numbers.Length; i <span class="o">=</span> i<span class="n">+1</span>)
+    {
+        sum <span class="o">=</span> sum <span class="o">+</span> numbers[i];
+    }
+    <span class="k">return</span> sum;
+}
+
+<span class="k">public</span> <span class="k">int</span> Product(<span class="k">int</span>[] numbers)
+{
+    <span class="k">var</span> product <span class="o">=</span> <span class="n">1</span>;
+    <span class="k">for</span> (<span class="k">int</span> i <span class="o">=</span> <span class="n">0</span>; i <span class="o">&lt;</span> numbers.Length; i <span class="o">=</span> i<span class="n">+1</span>)
+    {
+        product <span class="o">=</span> product <span class="o">*</span> numbers[i];
+    }
+    <span class="k">return</span> product;
+}
+</code></pre></td></tr></table>
+</section>
+<section >
+<h3>Discover right abstractions</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="csharp"><span class="k">class</span> Rectangle 
+{
+    <span class="k">public</span> Rectangle(<span class="k">int</span> width, <span class="k">int</span> height)
+    {
+        <span class="k">this</span>._width <span class="o">=</span> width;
+        <span class="k">this</span>._height <span class="o">=</span> height;
+    }
+}
+
+<span class="c">// ok or not ok?</span>
+<span class="k">class</span> Square <span class="o">:</span> Rectangle 
+{
+    <span class="k">public</span> Square(<span class="k">int</span> width) <span class="o">:</span> Rectangle(width, width)
+    { 
+    }
+}
+</code></pre></td></tr></table>
+</section>
+<section >
+<h3>Inhale concurrency</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="csharp"><span class="k">class</span> ThreadSafeOrNot
+{
+    <span class="k">static</span> <span class="k">readonly</span> <span class="k">object</span> _monitor;
+    Dictionary _field;
+
+    <span class="k">public</span> <span class="k">void</span> Manipulate()
+    {
+        <span class="k">lock</span> (_monitor)
+        {
+            DoSomething(_field);
+        }
+    }
+}
+</code></pre></td></tr></table>
+</section>
+<section >
+<h3>Twitter reactions</h3>
+<p><img src="images/twitter-reed.png" alt="twitter-reed" /></p>
+</section>
+<section >
+<h3>Twitter reactions</h3>
+<p><img src="images/twitter-james.png" alt="twitter-james" /></p>
+</section>
+<section >
+<h3>Twitter reactions</h3>
+<p><img src="images/twitter-paulmichael.png" alt="twitter-paulmichael" /></p>
+</section>
+<section >
+<h3>Twitter reactions</h3>
+<p><img src="images/twitter-marius.png" alt="twitter-marius" /></p>
+</section>
+</section>
+<section >
+<section >
+<h2>Examples of functional concepts in C#</h2>
+</section>
+<section >
+<h3>Immutability</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="csharp"><span class="k">class</span> Age
+{
+    <span class="k">readonly</span> <span class="k">int</span> _year;
+    Age(<span class="k">int</span> year)
+    {
+        _year <span class="o">=</span> year;
+    }
+    <span class="k">void</span> ChangeYear()
+    {
+        <span class="c">//_year = 1967; // Compile error if uncommented.</span>
+    }
+}
+</code></pre></td></tr></table>
+</section>
+<section >
+<h3>Generics</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="csharp"><span class="k">public</span> <span class="k">class</span> Stack&lt;T&gt; {
+    <span class="k">readonly</span> <span class="k">int</span> m_Size; 
+    <span class="k">int</span> m_StackPointer <span class="o">=</span> <span class="n">0</span>;
+    T[] m_Items;
+    <span class="k">public</span> Stack(<span class="k">int</span> size) {
+        m_Size <span class="o">=</span> size;
+        m_Items <span class="o">=</span> <span class="k">new</span> T[m_Size];
+    }
+    <span class="k">public</span> <span class="k">void</span> Push(T item) {
+        m_Items[m_StackPointer] <span class="o">=</span> item;
+        m_StackPointer+<span class="o">+</span>;
+    }
+    <span class="k">public</span> T Pop() {
+        m_StackPointer-<span class="o">-</span>;
+        <span class="k">return</span> m_Items[m_StackPointer];
+    }
+}
+</code></pre></td></tr></table>
+</section>
+<section >
+<h3>Lambda functions + LINQ</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="csharp"><span class="k">public</span> <span class="k">string</span> OddStringsTogether(IEnumberable&lt;<span class="k">int</span>&gt; numbers)
+{
+    <span class="k">return</span>
+        numbers
+            .Where(n <span class="o">=</span><span class="o">&gt;</span> n <span class="o">%</span> <span class="n">2</span> <span class="o">=</span><span class="o">=</span> <span class="n">1</span>)         <span class="c">// filter</span>
+            .Select(n <span class="o">=</span><span class="o">&gt;</span> n.ToString())      <span class="c">// map</span>
+            .Aggregate((n<span class="n">1</span>,n<span class="n">2</span>) <span class="o">=</span><span class="o">&gt;</span> n<span class="n">1</span> <span class="o">+</span> n<span class="n">2</span>); <span class="c">// fold</span>
+}
+</code></pre></td></tr></table>
+</section>
+<section >
+<h3>Async / Await</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
+<span class="l">9: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="csharp"><span class="k">async</span> Task&lt;<span class="k">int</span>&gt; AccessTheWebAsync()
+{ 
+    HttpClient client <span class="o">=</span> <span class="k">new</span> HttpClient();
+    Task&lt;<span class="k">string</span>&gt; getStringTask <span class="o">=</span> 
+        client.GetStringAsync(<span class="s">"http://msdn.microsoft.com"</span>);
+    DoIndependentWork();
+    <span class="k">string</span> urlContents <span class="o">=</span> await getStringTask;
+    <span class="k">return</span> urlContents.Length;
+}
+</code></pre></td></tr></table>
+</section>
+</section>
+<section >
+<h2>Summary</h2>
+<ul>
+<li>F# is a functional-first language available on .NET</li>
+<li>FP helps you to write better code</li>
+<li>Multi-paradigm languages (e.g. C#) also make use of functional bits</li>
+<li>It's worth to learn F# / FP - even if you just want to improve how you write code in non-FP languages</li>
+</ul>
+</section>
+<section >
+<h2>Next Week</h2>
+<h3>Basic concepts of Functional Programming</h3>
+<h3>talk + workshop</h3>
+<ul>
+<li>Immutability</li>
+<li>Recursion</li>
+<li>Expression-oriented programming</li>
+</ul>
+</section>
+
+
+        </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        // Add the nohighlight class and data-noescape attribute to code elements that have already been formatted by FSharp.Formatting
+        $('pre.highlighted code').addClass('nohighlight').attr('data-noescape', '');
+
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+
+            transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+            // Parallax scrolling
+            // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+            // parallaxBackgroundSize: '2100px 900px',
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function () { return !!document.body.classList; } },
+                { src: 'plugin/notes/notes.js', async: true, condition: function () { return !!document.body.classList; } }
+            ]
+        });
+
+    </script>
+</body>
+</html>
+
