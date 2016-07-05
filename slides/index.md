@@ -37,7 +37,7 @@
 ### Format
 
 * 4 meetings in July
-    * first - introductory talk (this one)
+    * first - introductory talk (this one, ~45min)
     * 2nd, 3rd, 4th - combined talk + workshops (45+90 ~= 2-2.5h)
 * Each workshop will cover concepts from the preceding talk
 * If it rolls out nicely, there'll be a continuation of the series
