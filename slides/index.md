@@ -8,6 +8,8 @@
 
 ## F# CAMP
 
+### Introduction to Functional Programming
+
 ### Tomasz Heimowski
 
 ---
@@ -54,8 +56,10 @@ https://amzn.com/1933988924
 
 ### Source for presentations 
 
-* Agenda - http://gda-gitlab-01.globalintech.pl/theimowski/fsharp-workshops
-* This presentation - http://gda-gitlab-01.globalintech.pl/theimowski/fsharp-workshops-intro
+* Main repo - https://github.com/theimowski/fsharp-workshops
+* Main slides - http://theimowski.com/fsharp-workshops 
+* This presentation repo - https://github.com/theimowski/fsharp-workshops-intro
+* This presentation slides - http://theimowski.com/fsharp-workshops-intro
 
 Presentation made by [FsReveal](http://fsprojects.github.io/FsReveal) 
 
@@ -74,6 +78,8 @@ https://github.com/Microsoft/visualfsharp/issues/544#issuecomment-221505568
 ***
 
 ## What is Functional Programming
+
+[Overview of the various programming paradigms according to Peter Van Roy](https://upload.wikimedia.org/wikipedia/commons/f/f7/Programming_paradigms.svg)
 
 ---
 
@@ -108,6 +114,10 @@ https://twitter.com/mariofusco/status/571999216039542784
 * F# came live with VS 2010 
 
 Other important FP languages: Haskell, Erlang, Scala, Clojure
+
+---
+
+### TODO: More "What" ?
 
 ***
 
@@ -330,8 +340,10 @@ Other important FP languages: Haskell, Erlang, Scala, Clojure
 
 ## Summary
 
+* In this series of workshops we'll learn basics of F# and Functional Programming
+* FP is mainly about *"evaluation of expressions, rather than execution of commands"*
+* FP helps you write better code
 * F# is a functional-first language available on .NET
-* FP helps you to write better code
 * Multi-paradigm languages (e.g. C#) also make use of functional bits
 * It's worth to learn F# / FP - even if you just want to improve how you write code in non-FP languages
 
