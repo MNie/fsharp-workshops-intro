@@ -31,6 +31,7 @@
 
 * Learn F# language
 * Discover Functional Programming concepts
+* Find out how to start using F# at work
 * Have fun
 * No prior F# / Functional Programming knowledge required - we're starting from scratch
 
@@ -38,7 +39,7 @@
 
 ### Format
 
-* 4 meetings in July
+* 4 meetings in July, each thursday
     * first - introductory talk (this one, ~45min)
     * 2nd, 3rd, 4th - combined talk + workshops (45+90 ~= 2-2.5h)
 * Each workshop will cover concepts from the preceding talk
@@ -96,7 +97,7 @@ https://github.com/Microsoft/visualfsharp/issues/544#issuecomment-221505568
     * Commands
 * Declarative style:
     * Expressions
-    * Functional
+    * Functions
 
 https://twitter.com/mariofusco/status/571999216039542784
 
@@ -117,7 +118,11 @@ Other important FP languages: Haskell, Erlang, Scala, Clojure
 
 ---
 
-### TODO: More "What" ?
+### Hello world F#
+
+    [lang=fsharp]
+    let message = "Hello world!"
+    printfn "%s" message
 
 ***
 
@@ -133,7 +138,7 @@ Other important FP languages: Haskell, Erlang, Scala, Clojure
         return 5 + 6;
     }
 
-    public int TestA()
+    public int TestB()
     {
         return Sum(5, 6);
     }
@@ -142,7 +147,7 @@ Other important FP languages: Haskell, Erlang, Scala, Clojure
     {
         var result = a + b;
         Console.WriteLine("Result is {0}", result);
-        return a + b;
+        return result;
     }
 
 *"Referential transparency"*
@@ -152,7 +157,7 @@ Other important FP languages: Haskell, Erlang, Scala, Clojure
 ### Make code more testable
 
     [lang=csharp]
-    public decimal TestMe(decimal hourlyRate, decimal hours)
+    public decimal Salary(decimal hourlyRate, decimal hours)
     {
         if (System.DateTime.Now.DayOfWeek = DayOfWeek.Saturday)
         {
