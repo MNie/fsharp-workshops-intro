@@ -46,7 +46,9 @@
 </head>
 <body>
     <div class="reveal">
-        
+        <div class="tip" id="fs1">val message : string<br /><br />Full name: index.message</div>
+<div class="tip" id="fs2">val printfn : format:Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.printfn</div>
+
         <!-- Any section element inside of this container is displayed as a slide -->
         <div class="slides">
             <section >
@@ -74,6 +76,7 @@
 <ul>
 <li>Learn F# language</li>
 <li>Discover Functional Programming concepts</li>
+<li>Find out how to start using F# at work</li>
 <li>Have fun</li>
 <li>No prior F# / Functional Programming knowledge required - we're starting from scratch</li>
 </ul>
@@ -82,7 +85,7 @@
 <h3>Format</h3>
 <ul>
 <li>
-4 meetings in July
+4 meetings in July, each thursday
 <ul>
 <li>first - introductory talk (this one, ~45min)</li>
 <li>2nd, 3rd, 4th - combined talk + workshops (45+90 ~= 2-2.5h)</li>
@@ -140,7 +143,7 @@ Imperative style:
 Declarative style:
 <ul>
 <li>Expressions</li>
-<li>Functional</li>
+<li>Functions</li>
 </ul>
 </li>
 </ul>
@@ -160,7 +163,15 @@ Declarative style:
 <p>Other important FP languages: Haskell, Erlang, Scala, Clojure</p>
 </section>
 <section >
-<h3>TODO: More "What" ?</h3>
+<h3>Hello world F#</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="i">message</span> <span class="o">=</span> <span class="s">&quot;Hello world!&quot;</span>
+<span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="f">printfn</span> <span class="s">&quot;</span><span class="pf">%s</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs1', 3)" onmouseover="showTip(event, 'fs1', 3)" class="i">message</span>
+</code></pre></td>
+</tr>
+</table>
 </section>
 </section>
 <section >
@@ -191,7 +202,7 @@ Declarative style:
     <span class="k">return</span> <span class="n">5</span> <span class="o">+</span> <span class="n">6</span>;
 }
 
-<span class="k">public</span> <span class="k">int</span> TestA()
+<span class="k">public</span> <span class="k">int</span> TestB()
 {
     <span class="k">return</span> Sum(<span class="n">5</span>, <span class="n">6</span>);
 }
@@ -200,7 +211,7 @@ Declarative style:
 {
     <span class="k">var</span> result <span class="o">=</span> a <span class="o">+</span> b;
     Console.WriteLine(<span class="s">"Result is {0}"</span>, result);
-    <span class="k">return</span> a <span class="o">+</span> b;
+    <span class="k">return</span> result;
 }
 </code></pre></td></tr></table>
 <p><em>"Referential transparency"</em></p>
@@ -223,7 +234,7 @@ Declarative style:
 <span class="l">14: </span>
 <span class="l">15: </span>
 </pre></td>
-<td class="snippet"><pre class="fssnip highlighted"><code lang="csharp"><span class="k">public</span> <span class="k">decimal</span> TestMe(<span class="k">decimal</span> hourlyRate, <span class="k">decimal</span> hours)
+<td class="snippet"><pre class="fssnip highlighted"><code lang="csharp"><span class="k">public</span> <span class="k">decimal</span> Salary(<span class="k">decimal</span> hourlyRate, <span class="k">decimal</span> hours)
 {
     <span class="k">if</span> (System.DateTime.Now.DayOfWeek <span class="o">=</span> DayOfWeek.Saturday)
     {
