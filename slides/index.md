@@ -47,11 +47,38 @@
 
 ---
 
-### Real World Functional Programming
+### Books (soon in our library)
+
+---
+
+#### Real World Functional Programming
 
 ![real-world-functional-programming-cover](images/real-world-functional-programming-cover.jpg)
 
 https://amzn.com/1933988924
+
+---
+
+#### F# Deep Dives
+
+![fsharp-deep-dives](images/fsharp-deep-dives.jpg)
+
+https://amzn.com/1617291323
+
+---
+
+#### Structure and Interpretation of Computer Programs
+
+https://amzn.com/0262510871
+
+
+#### Purely Functional Data Structures
+
+https://amzn.com/0521663504
+
+#### An Introduction to Functional Programming Through Lambda Calculus
+
+https://amzn.com/0486478831
 
 ---
 
@@ -87,6 +114,13 @@ https://github.com/Microsoft/visualfsharp/issues/544#issuecomment-221505568
 > Functional programming is a style of programming that emphasizes the evaluation of expressions, rather than execution of commands. The expressions in these languages are formed by using functions to combine basic values.
 
 *Hutton*
+
+---
+
+### State
+
+* In Object-Oriented Programming we **combine** data with behavior
+* In Functional Programming we **separate out** data from behavior
 
 ---
 
@@ -202,7 +236,7 @@ Other important FP languages: Haskell, Erlang, Scala, Clojure
 
 ---
 
-### Discover right abstractions
+### Discover right "abstractions"
 
     [lang=csharp]
     class Rectangle 
@@ -221,6 +255,10 @@ Other important FP languages: Haskell, Erlang, Scala, Clojure
         { 
         }
     }
+
+---
+
+### Trying to be too Object-Oriented
 
 ---
 
